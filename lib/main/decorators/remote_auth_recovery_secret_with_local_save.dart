@@ -4,17 +4,17 @@ import '../../domain/usecases/usecases.dart';
 class RemoteAuthRecoverySecretWithLocalSave implements AuthRecoverySecretUsecase {
   const RemoteAuthRecoverySecretWithLocalSave({
     required this.remoteAuthRecoverySecret,
-    required this.localSaveTotpSecret,
+    required this.saveTotpSecretUsecase,
   });
 
   final RemoteAuthRecoverySecret remoteAuthRecoverySecret;
-  final LocalSaveTotpSecret localSaveTotpSecret;
+  final SaveTotpSecretUsecase saveTotpSecretUsecase;
 
   @override
   Future<void> call({required AuthRecoverySecretUsecaseParams params}) async {
     try {
       final totpSecret = await remoteAuthRecoverySecret.call(params: params);
-      await localSaveTotpSecret.call(totpSecret);
+      await saveTotpSecretUsecase.call(totpSecret);
     } catch (_) {
       rethrow;
     }

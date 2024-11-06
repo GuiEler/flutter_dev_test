@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
-import 'factories/pages/login/recovery_secret_page_factory.dart';
 import 'factories/pages/pages.dart';
 
 enum AppRoutes {
@@ -47,7 +46,7 @@ mixin AppRouter {
             name: AppRoutes.recoverySecret.name,
             pageBuilder: (context, state) => CupertinoPage(
               key: state.pageKey,
-              child: makeRecoverySecretPage(),
+              child: makeRecoverySecretPage(extra: state.extra),
             ),
           ),
         ],

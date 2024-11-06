@@ -7,18 +7,18 @@ import '../http/http.dart';
 
 class RemoteAuthRecoverySecret implements AuthRecoverySecretUsecase {
   const RemoteAuthRecoverySecret({
-    required this.authorizedHttpClient,
+    required this.httpClient,
     required this.url,
   });
 
-  final HttpClient authorizedHttpClient;
+  final HttpClient httpClient;
   final String url;
 
   @override
   Future<String> call({required AuthRecoverySecretUsecaseParams params}) async {
     try {
       final body = _RemoteLoginParams.fromDomain(params: params).toMap();
-      final response = await authorizedHttpClient.request(
+      final response = await httpClient.request(
         url: url,
         body: body,
         method: RequestMethod.post,

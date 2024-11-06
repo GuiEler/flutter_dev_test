@@ -43,4 +43,6 @@ class PtBr implements Translations {
   String get confirm => 'Confirmar';
   @override
   String get doNotReceivedTheCode => 'Não recebi o código';
+  @override
+  String get invalidCode => 'Código inválido';
 }

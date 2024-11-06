@@ -21,4 +21,5 @@ abstract class Translations {
   String get insertTheSendedCode;
   String get confirm;
   String get doNotReceivedTheCode;
+  String get invalidCode;
 }

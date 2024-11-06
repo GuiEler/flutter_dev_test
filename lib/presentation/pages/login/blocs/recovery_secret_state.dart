@@ -5,7 +5,8 @@ sealed class RecoverySecretState {
 }
 
 final class RecoverySecretInitialState extends RecoverySecretState {
-  const RecoverySecretInitialState();
+  const RecoverySecretInitialState({required this.extra});
+  final Object? extra;
 }
 
 final class RecoverySecretLoadingState extends RecoverySecretState {

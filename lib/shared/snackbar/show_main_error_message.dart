@@ -9,9 +9,10 @@ void showMainErrorMessage({bool useExpandedVersion = false, required String erro
   if (context == null) {
     return;
   }
-  final screenHeight = MediaQuery.sizeOf(context).height;
+
+  final screenPadding = MediaQuery.paddingOf(context).bottom;
   final snackbar = CustomSnackBar(
-    margin: EdgeInsets.fromLTRB(48, 0, 48, screenHeight * 0.16),
+    margin: EdgeInsets.fromLTRB(20, 0, 20, screenPadding + 24),
     borderRadius: 8,
     isDismissible: false,
     snackStyle: useExpandedVersion ? SnackStyle.grounded : SnackStyle.floating,

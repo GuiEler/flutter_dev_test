@@ -10,9 +10,11 @@ class EmailTextField extends StatefulWidget {
   const EmailTextField({
     super.key,
     required this.validateEmail,
+    required this.passwordFocusNode,
   });
 
   final void Function(String) validateEmail;
+  final FocusNode passwordFocusNode;
 
   @override
   State<EmailTextField> createState() => _EmailTextFieldState();
@@ -29,7 +31,11 @@ class _EmailTextFieldState extends State<EmailTextField> {
           onChanged: widget.validateEmail,
           errorText: state.emailErrorText,
           keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
           controller: controller,
+          onSubmitted: controller.text.isNotEmpty && state.emailErrorText == null
+              ? (_) => widget.passwordFocusNode.requestFocus()
+              : null,
           suffixIcon: controller.text.isNotEmpty
               ? Material(
                   color: Colors.transparent,

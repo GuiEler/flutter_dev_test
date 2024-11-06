@@ -30,6 +30,7 @@ class _LoginPageState extends State<LoginPage> with KeyboardManager {
   static const Duration animationDelay = Duration(milliseconds: 200);
   late final _loginCubit = context.read<LoginCubit>();
   late final _loginFormCubit = context.read<LoginFormCubit>();
+  final FocusNode passwordFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -96,10 +97,20 @@ class _LoginPageState extends State<LoginPage> with KeyboardManager {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            EmailTextField(validateEmail: _loginFormCubit.validateEmail),
+                            EmailTextField(
+                              validateEmail: _loginFormCubit.validateEmail,
+                              passwordFocusNode: passwordFocusNode,
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10, bottom: 20),
-                              child: PasswordTextField(validatePassword: _loginFormCubit.validatePassword),
+                              child: PasswordTextField(
+                                onSubmitted: (state) => _loginCubit.login(
+                                  email: state.email,
+                                  password: state.password,
+                                ),
+                                validatePassword: _loginFormCubit.validatePassword,
+                                focusNode: passwordFocusNode,
+                              ),
                             ),
                             BlocBuilder<LoginCubit, LoginState>(
                               builder: (context, loginState) => BlocBuilder<LoginFormCubit, LoginFormState>(
