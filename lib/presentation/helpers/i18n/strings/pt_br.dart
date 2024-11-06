@@ -27,4 +27,20 @@ class PtBr implements Translations {
 
   @override
   String get home => 'home';
+  @override
+  String get forgotPassword => 'Esqueci a senha';
+  @override
+  String get email => 'E-mail';
+  @override
+  String get password => 'Senha';
+  @override
+  String get enter => 'Entrar';
+  @override
+  String get verification => 'Verificação';
+  @override
+  String get insertTheSendedCode => 'Insira o código que foi enviado:';
+  @override
+  String get confirm => 'Confirmar';
+  @override
+  String get doNotReceivedTheCode => 'Não recebi o código';
 }

@@ -7,11 +7,11 @@ import '../http/http.dart';
 
 class RemoteAuthLoginWithTotpCode implements AuthLoginWithTotpCodeUsecase {
   const RemoteAuthLoginWithTotpCode({
-    required this.authorizedHttpClient,
+    required this.httpClient,
     required this.url,
   });
 
-  final HttpClient authorizedHttpClient;
+  final HttpClient httpClient;
   final String url;
 
   @override
@@ -26,7 +26,7 @@ class RemoteAuthLoginWithTotpCode implements AuthLoginWithTotpCodeUsecase {
         'password': password,
         'totp_code': totpCode,
       };
-      await authorizedHttpClient.request(
+      await httpClient.request(
         url: url,
         body: body,
         method: RequestMethod.post,

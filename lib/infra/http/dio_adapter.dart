@@ -120,5 +120,5 @@ class DioAdapter implements HttpClient {
   }
 
   @override
-  void close() => client.close();
+  void close() => client.close(force: true);
 }

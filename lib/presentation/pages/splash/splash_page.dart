@@ -22,9 +22,16 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   @override
-  Widget build(BuildContext context) => const SizedBox.expand(
-        child: DecoratedBox(
-          decoration: BoxDecoration(color: GlobalColors.surface),
+  Widget build(BuildContext context) => BlocListener<SplashCubit, SplashState>(
+        listener: (context, state) {
+          if (state is SplashNavigateState) {
+            state.navigate(context);
+          }
+        },
+        child: const SizedBox.expand(
+          child: DecoratedBox(
+            decoration: BoxDecoration(color: GlobalColors.invert),
+          ),
         ),
       );
 }

@@ -13,4 +13,12 @@ abstract class Translations {
   String get attemptsExceededError;
 
   String get home;
+  String get forgotPassword;
+  String get email;
+  String get password;
+  String get enter;
+  String get verification;
+  String get insertTheSendedCode;
+  String get confirm;
+  String get doNotReceivedTheCode;
 }

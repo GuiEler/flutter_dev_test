@@ -1,4 +1,3 @@
-import '../../data/usecases/local_generate_totp_code.dart';
 import '../../data/usecases/remote_auth_login_with_totp_code.dart';
 import '../../data/usecases/usecases.dart';
 import '../../domain/errors/errors.dart';
@@ -6,13 +5,13 @@ import '../../domain/usecases/usecases.dart';
 
 class RemoteAuthLoginWithTotpAuth implements AuthLoginUsecase {
   const RemoteAuthLoginWithTotpAuth({
-    required this.loadTotpSecret,
-    required this.localGenerateTotpCode,
+    required this.loadTotpSecretUsecase,
+    required this.generateTotpCodeUsecase,
     required this.remoteAuthLoginWithTotpCode,
   });
 
-  final LocalLoadTotpSecret loadTotpSecret;
-  final LocalGenerateTotpCode localGenerateTotpCode;
+  final LoadTotpSecretUsecase loadTotpSecretUsecase;
+  final GenerateTotpCodeUsecase generateTotpCodeUsecase;
   final RemoteAuthLoginWithTotpCode remoteAuthLoginWithTotpCode;
 
   @override
@@ -21,11 +20,11 @@ class RemoteAuthLoginWithTotpAuth implements AuthLoginUsecase {
     required String password,
   }) async {
     try {
-      final totpSecret = await loadTotpSecret();
+      final totpSecret = await loadTotpSecretUsecase.call();
       if (totpSecret.isEmpty) {
         throw const NoTotpSecretError();
       } else {
-        final String totpCode = localGenerateTotpCode.call(totpSecret);
+        final String totpCode = generateTotpCodeUsecase.call(totpSecret);
         return remoteAuthLoginWithTotpCode.call(
           totpCode: totpCode,
           username: username,

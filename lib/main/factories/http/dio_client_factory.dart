@@ -5,7 +5,7 @@ import 'package:flutter_pretty_dio_logger/flutter_pretty_dio_logger.dart';
 import '../../../data/http/http.dart';
 import '../../../infra/http/http.dart';
 
-HttpClient makeDioAdapter({bool useMTLS = true}) {
+HttpClient makeDioAdapter() {
   const int timeOutInMilliseconds = 25000;
   final Dio client = Dio(
     BaseOptions(
