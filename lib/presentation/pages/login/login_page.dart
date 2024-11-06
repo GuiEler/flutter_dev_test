@@ -97,15 +97,15 @@ class _LoginPageState extends State<LoginPage> with KeyboardManager {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            EmailTextField(
-                              validateEmail: _loginFormCubit.validateEmail,
+                            UsernameTextField(
+                              validateUsername: _loginFormCubit.validateUsername,
                               passwordFocusNode: passwordFocusNode,
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 10, bottom: 20),
                               child: PasswordTextField(
                                 onSubmitted: (state) => _loginCubit.login(
-                                  email: state.email,
+                                  username: state.username,
                                   password: state.password,
                                 ),
                                 validatePassword: _loginFormCubit.validatePassword,
@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> with KeyboardManager {
                                 builder: (context, loginFormState) => ElevatedButton(
                                   onPressed: loginFormState.isFormValid
                                       ? () => _loginCubit.login(
-                                            email: loginFormState.email,
+                                            username: loginFormState.username,
                                             password: loginFormState.password,
                                           )
                                       : null,

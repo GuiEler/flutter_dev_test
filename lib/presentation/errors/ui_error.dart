@@ -26,10 +26,6 @@ sealed class UIError {
       _Unexpected(message: message.isNotEmpty ? message : R.strings.unexpectedError, detail: detail);
   factory UIError.timeOut({String message = '', String detail = ''}) =>
       _TimeOut(message: message.isNotEmpty ? message : R.strings.requestTimeOut, detail: detail);
-  factory UIError.invalidEmail({String message = '', String detail = ''}) => _InvalidEmail(
-        message: message.isNotEmpty ? message : R.strings.invalidEmailError,
-        detail: detail,
-      );
   factory UIError.attemptsExceeded({String message = '', String detail = ''}) => _AttemptsExceeded(
         message: message.isNotEmpty ? message : R.strings.attemptsExceededError,
         detail: detail,
@@ -76,10 +72,6 @@ final class _TimeOut extends UIError implements TimeOutError {
   const _TimeOut({super.message, super.detail}) : super._();
 }
 
-final class _InvalidEmail extends UIError implements InvalidEmailError {
-  const _InvalidEmail({super.message, super.detail}) : super._();
-}
-
 final class _AttemptsExceeded extends UIError implements AttemptsExceededError {
   const _AttemptsExceeded({super.message, super.detail}) : super._();
 }
@@ -111,7 +103,6 @@ extension ConvertToUIError on DomainError {
       TimeOutError() => UIError.timeOut(message: finalMessage),
       InvalidDataError() => UIError.unexpected(message: finalMessage),
       UnexpectedError() => UIError.unexpected(message: finalMessage),
-      InvalidEmailError() => UIError.invalidEmail(message: finalMessage),
       AttemptsExceededError() => UIError.attemptsExceeded(message: finalMessage),
       _ => UIError.unexpected(message: finalMessage),
     };

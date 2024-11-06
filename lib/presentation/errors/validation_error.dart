@@ -10,9 +10,6 @@ sealed class ValidationError implements Exception {
   factory ValidationError.requiredField({String message = ''}) => _RequiredField(message: message);
   factory ValidationError.invalidField({String message = ''}) => _InvalidField(message: message);
   factory ValidationError.minimumLength({String message = ''}) => _MinimumLength(message: message);
-  factory ValidationError.invalidCpf({String message = ''}) => _InvalidCpf(message: message);
-  factory ValidationError.invalidCpfOrEmail({String message = ''}) => _InvalidCpfOfEmail(message: message);
-  factory ValidationError.invalidEmail({String message = ''}) => _InvalidEmail(message: message);
 }
 
 final class _NoError extends ValidationError implements NoError {
@@ -31,18 +28,6 @@ final class _MinimumLength extends ValidationError implements InvalidFieldError 
   const _MinimumLength({super.message}) : super._();
 }
 
-final class _InvalidCpf extends ValidationError implements InvalidFieldError {
-  const _InvalidCpf({super.message}) : super._();
-}
-
-final class _InvalidCpfOfEmail extends ValidationError implements InvalidFieldError {
-  const _InvalidCpfOfEmail({super.message}) : super._();
-}
-
-final class _InvalidEmail extends ValidationError implements InvalidEmailError {
-  const _InvalidEmail({super.message}) : super._();
-}
-
 extension ConvertToDomainError on ValidationError {
   /// Convert ValidationError to DomainError equivalent
   DomainError toDomainError() => switch (runtimeType) {
@@ -50,9 +35,6 @@ extension ConvertToDomainError on ValidationError {
         const (_RequiredField) => const RequiredFieldError(),
         const (_InvalidField) => const InvalidFieldError(),
         const (_MinimumLength) => const InvalidFieldError(),
-        const (_InvalidCpf) => const InvalidFieldError(),
-        const (_InvalidCpfOfEmail) => const InvalidFieldError(),
-        const (_InvalidEmail) => const InvalidEmailError(),
         _ => const UnexpectedError(),
       };
 }

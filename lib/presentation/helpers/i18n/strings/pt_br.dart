@@ -21,8 +21,6 @@ class PtBr implements Translations {
   @override
   String get requestTimeOut => 'Tempo de resposta excedido.';
   @override
-  String get invalidEmailError => 'Insira um e-mail válido.';
-  @override
   String get attemptsExceededError => 'Tentativas de login excedidas.';
 
   @override
@@ -30,7 +28,7 @@ class PtBr implements Translations {
   @override
   String get forgotPassword => 'Esqueci a senha';
   @override
-  String get email => 'E-mail';
+  String get username => 'Usuário';
   @override
   String get password => 'Senha';
   @override

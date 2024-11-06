@@ -5,7 +5,6 @@ part 'attempts_exceeded_error.dart';
 part 'domain_error.dart';
 part 'invalid_credentials_error.dart';
 part 'invalid_data_error.dart';
-part 'invalid_email_error.dart';
 part 'invalid_field_error.dart';
 part 'no_connection_error.dart';
 part 'no_error.dart';

@@ -13,11 +13,6 @@ class ValidationBuilder {
     return this;
   }
 
-  ValidationBuilder email() {
-    _fieldValidations.add(EmailValidation(fieldName));
-    return this;
-  }
-
   ValidationBuilder min(int size) {
     _fieldValidations.add(MinLengthValidation(field: fieldName, size: size));
     return this;

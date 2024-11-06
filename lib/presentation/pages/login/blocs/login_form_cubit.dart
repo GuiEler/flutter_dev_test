@@ -14,29 +14,31 @@ class LoginFormCubit extends Cubit<LoginFormState> {
 
   final Validation _validation;
 
-  String _email = '';
+  String _username = '';
   String _password = '';
   UIError _validateField(String field) {
     final formData = {
-      'email': _email,
+      'username': _username,
       'password': _password,
     };
     final error = _validation.validate(field: field, input: formData);
     return error.toDomainError().toUIError();
   }
 
-  void validateEmail(String email) {
-    _email = email;
-    final error = _validateField('email');
-    final String? emailErrorText = error is NoError ? null : error.message;
+  void validateUsername(String username) {
+    _username = username;
+    final error = _validateField('username');
+    final String? usernameErrorText = error is NoError ? null : error.message;
     emit(
-      LoginFormValidatingEmailState(
-        email: email,
+      LoginFormValidatingUsernameState(
+        username: username,
         password: state.password,
-        emailErrorText: emailErrorText,
+        usernameErrorText: usernameErrorText,
         passwordErrorText: state.passwordErrorText,
-        isFormValid:
-            email.isNotEmpty && emailErrorText == null && state.password.isNotEmpty && state.passwordErrorText == null,
+        isFormValid: username.isNotEmpty &&
+            usernameErrorText == null &&
+            state.password.isNotEmpty &&
+            state.passwordErrorText == null,
       ),
     );
   }
@@ -47,12 +49,14 @@ class LoginFormCubit extends Cubit<LoginFormState> {
     final String? passwordErrorText = error is NoError ? null : error.message;
     emit(
       LoginFormValidatingPasswordState(
-        email: state.email,
+        username: state.username,
         password: password,
-        emailErrorText: state.emailErrorText,
+        usernameErrorText: state.usernameErrorText,
         passwordErrorText: passwordErrorText,
-        isFormValid:
-            password.isNotEmpty && passwordErrorText == null && state.email.isNotEmpty && state.emailErrorText == null,
+        isFormValid: password.isNotEmpty &&
+            passwordErrorText == null &&
+            state.username.isNotEmpty &&
+            state.usernameErrorText == null,
       ),
     );
   }

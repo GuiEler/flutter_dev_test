@@ -19,9 +19,9 @@ class LoginCubit extends Cubit<LoginState> {
   final AuthLoginUsecase _authLoginUsecase;
   final VoidCallback _onClose;
 
-  Future<void> login({required String email, required String password}) async {
+  Future<void> login({required String username, required String password}) async {
     try {
-      await _authLoginUsecase.call(username: email, password: password);
+      await _authLoginUsecase.call(username: username, password: password);
       emit(LoginNavigateState(navigate: (context) => context.pushReplacement(AppRoutes.home.path)));
     } on DomainError catch (error) {
       if (error is NoTotpSecretError) {
@@ -30,7 +30,7 @@ class LoginCubit extends Cubit<LoginState> {
             navigate: (context) => context.push(
               AppRoutes.recoverySecret.path,
               extra: {
-                'username': email,
+                'username': username,
                 'password': password,
               },
             ),

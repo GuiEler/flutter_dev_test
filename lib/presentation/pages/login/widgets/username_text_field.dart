@@ -6,34 +6,34 @@ import '../../../helpers/i18n/i18n.dart';
 import '../blocs/login_form_cubit.dart';
 import 'widgets.dart';
 
-class EmailTextField extends StatefulWidget {
-  const EmailTextField({
+class UsernameTextField extends StatefulWidget {
+  const UsernameTextField({
     super.key,
-    required this.validateEmail,
+    required this.validateUsername,
     required this.passwordFocusNode,
   });
 
-  final void Function(String) validateEmail;
+  final void Function(String) validateUsername;
   final FocusNode passwordFocusNode;
 
   @override
-  State<EmailTextField> createState() => _EmailTextFieldState();
+  State<UsernameTextField> createState() => _UsernameTextFieldState();
 }
 
-class _EmailTextFieldState extends State<EmailTextField> {
+class _UsernameTextFieldState extends State<UsernameTextField> {
   late final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) => BlocBuilder<LoginFormCubit, LoginFormState>(
-        buildWhen: (previous, current) => current is LoginFormValidatingEmailState,
+        buildWhen: (previous, current) => current is LoginFormValidatingUsernameState,
         builder: (context, state) => CustomTextField(
-          labelText: R.strings.email,
-          onChanged: widget.validateEmail,
-          errorText: state.emailErrorText,
-          keyboardType: TextInputType.emailAddress,
+          labelText: R.strings.username,
+          onChanged: widget.validateUsername,
+          errorText: state.usernameErrorText,
+          keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
           controller: controller,
-          onSubmitted: controller.text.isNotEmpty && state.emailErrorText == null
+          onSubmitted: controller.text.isNotEmpty && state.usernameErrorText == null
               ? (_) => widget.passwordFocusNode.requestFocus()
               : null,
           suffixIcon: controller.text.isNotEmpty
@@ -46,7 +46,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
                     ),
                     onPressed: () {
                       controller.clear();
-                      widget.validateEmail('');
+                      widget.validateUsername('');
                     },
                     color: GlobalColors.primary,
                     splashRadius: 16,

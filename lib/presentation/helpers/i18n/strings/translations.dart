@@ -9,12 +9,11 @@ abstract class Translations {
   String get unauthorizedError;
   String get unexpectedError;
   String get requestTimeOut;
-  String get invalidEmailError;
   String get attemptsExceededError;
 
   String get home;
   String get forgotPassword;
-  String get email;
+  String get username;
   String get password;
   String get enter;
   String get verification;
